@@ -4,7 +4,7 @@
   "description": "Schedule Manager - Full Stack Application",
   "main": "backend/src/server.js",
   "scripts": {
-    "start": "node start.js",
+    "start": "node simple-start.js",
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
     "install:backend": "cd backend && npm install --only=production",
     "install:frontend": "cd frontend && npm install --legacy-peer-deps",
@@ -12,7 +12,7 @@
     "build:backend": "cd backend && echo 'Backend ready'",
     "build:frontend": "cd frontend && npm install --legacy-peer-deps && npm run build",
     "migrate": "cd backend && npm run migrate",
-    "postinstall": "npm run install:backend",
+    "postinstall": "npm run install:backend"
     "railway:start": "cd backend && npm run migrate && npm start"
   },
   "engines": {

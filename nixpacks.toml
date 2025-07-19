@@ -9,8 +9,8 @@ cmds = [
 
 [phases.build]
 cmds = [
-  'echo "Backend dependencies installed"',
-  'chmod +x start.js'
+  'echo "Build completed - no database operations during build"',
+  'chmod +x simple-start.js'
 ]
 
 [start]

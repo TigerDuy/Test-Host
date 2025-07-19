@@ -102,12 +102,36 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📅 Schedule Manager Backend API`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
-  console.log(`💡 Health Check: http://localhost:${PORT}/health`);
+// Auto-run migrations in production
+async function runMigrations() {
+  if (process.env.NODE_ENV === 'production') {
+    try {
+      console.log('📊 Running database migrations...');
+      const knex = require('./config/database');
+      await knex.migrate.latest();
+      console.log('✅ Migrations completed successfully');
+    } catch (error) {
+      console.log('⚠️ Migration error (continuing anyway):', error.message);
+    }
+  }
+}
+
+// Start server
+async function startServer() {
+  await runMigrations();
+
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📅 Schedule Manager Backend API`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
+    console.log(`💡 Health Check: http://localhost:${PORT}/health`);
+  });
+}
+
+startServer().catch(err => {
+  console.error('Failed to start server:', err);
+  process.exit(1);
 });
 
 module.exports = app;
