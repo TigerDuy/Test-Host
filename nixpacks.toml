@@ -1,0 +1,21 @@
+[phases.setup]
+nixPkgs = ['nodejs-18_x', 'postgresql']
+
+[phases.install]
+cmds = [
+  'npm install',
+  'cd backend && npm ci --only=production'
+]
+
+[phases.build]
+cmds = [
+  'echo "Backend dependencies installed"',
+  'chmod +x start.js'
+]
+
+[start]
+cmd = 'npm start'
+
+[variables]
+NODE_ENV = 'production'
+PORT = '5001'

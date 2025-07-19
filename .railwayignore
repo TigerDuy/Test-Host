@@ -1,0 +1,32 @@
+# Ignore frontend for backend deployment
+frontend/
+frontend/**
+
+# Ignore development files
+*.md
+docker-compose.yml
+docker-compose.prod.yml
+Dockerfile
+.env.local
+.env.development
+
+# Ignore documentation
+README.md
+BaoCao-ScheduleManager.md
+RAILWAY_DEPLOY.md
+
+# Ignore git
+.git/
+.gitignore
+
+# Ignore IDE
+.vscode/
+.idea/
+
+# Ignore logs
+*.log
+logs/
+
+# Ignore temporary files
+tmp/
+temp/

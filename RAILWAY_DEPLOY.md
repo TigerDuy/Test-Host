@@ -26,11 +26,12 @@ git push origin main
    - Click "Add Service" → "Database" → "Redis"
    - Railway sẽ tự động tạo Redis và cung cấp `REDIS_URL`
 
-## Bước 4: Deploy Backend
+## Bước 4: Deploy Backend (Cách 1 - Monorepo)
 
-1. **Tạo Backend Service:**
-   - Click "Add Service" → "GitHub Repo"
-   - Chọn repository và set Root Directory: `backend`
+1. **Deploy từ Root:**
+   - Click "New Project" → "Deploy from GitHub repo"
+   - Chọn repository (không set Root Directory)
+   - Railway sẽ tự động detect và chạy backend
 
 2. **Cấu hình Environment Variables:**
 ```env
@@ -46,9 +47,35 @@ RATE_LIMIT_MAX_REQUESTS=100
 LOG_LEVEL=info
 ```
 
-3. **Cấu hình Build:**
-   - Build Command: `npm install`
-   - Start Command: `npm start`
+3. **Railway sẽ tự động:**
+   - Detect package.json ở root
+   - Chạy `npm install` và `postinstall` (migrations)
+   - Start với `npm start`
+
+## Bước 4B: Deploy Backend (Cách 2 - Separate Repo)
+
+**Nếu cách 1 không work, tạo repo riêng:**
+
+1. **Tạo repo mới cho backend:**
+```bash
+# Tạo repo mới trên GitHub: schedule-manager-backend
+git clone https://github.com/your-username/schedule-manager-backend.git
+cd schedule-manager-backend
+
+# Copy backend files
+cp -r ../schedule-manager/backend/* .
+cp -r ../schedule-manager/shared .
+
+# Copy package.json từ file backend-deploy-package.json
+# Commit và push
+git add .
+git commit -m "Initial backend setup"
+git push origin main
+```
+
+2. **Deploy từ repo riêng:**
+   - Railway → New Project → Deploy from GitHub
+   - Chọn repo `schedule-manager-backend`
 
 ## Bước 5: Deploy Frontend
 

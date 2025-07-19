@@ -1,0 +1,28 @@
+{
+  "name": "schedule-manager",
+  "version": "1.0.0",
+  "description": "Schedule Manager - Full Stack Application",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "start": "node start.js",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "install:backend": "cd backend && npm install --only=production",
+    "install:frontend": "cd frontend && npm install --legacy-peer-deps",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "build:backend": "cd backend && echo 'Backend ready'",
+    "build:frontend": "cd frontend && npm install --legacy-peer-deps && npm run build",
+    "migrate": "cd backend && npm run migrate",
+    "postinstall": "npm run install:backend",
+    "railway:start": "cd backend && npm run migrate && npm start"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": ["schedule", "calendar", "fullstack", "nodejs", "nextjs"],
+  "author": "Schedule Manager Team",
+  "license": "MIT"
+}
