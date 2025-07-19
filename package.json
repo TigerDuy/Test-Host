@@ -12,7 +12,7 @@
     "build:backend": "cd backend && echo 'Backend ready'",
     "build:frontend": "cd frontend && npm install --legacy-peer-deps && npm run build",
     "migrate": "cd backend && npm run migrate",
-    "postinstall": "npm run install:backend"
+    "postinstall": "npm run install:backend",
     "railway:start": "cd backend && npm run migrate && npm start"
   },
   "engines": {
